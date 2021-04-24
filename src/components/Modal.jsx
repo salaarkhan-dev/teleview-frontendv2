@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "./Button";
+import DropDown from "./DropDown";
+import TextArea from "./TextArea";
 import TextField from "./TextField";
 
 const Modal = ({ handleClose }) => {
@@ -12,11 +14,11 @@ const Modal = ({ handleClose }) => {
       <FormWrapper>
         <TextFieldWrapper>
           <TextField placeholder="Name" />
-          <TextField placeholder="Description" height="80px" />
-          <TextField placeholder="Privacy" />
+          <TextArea height="80px" placeholder="Description"></TextArea>
+          <DropDown />
         </TextFieldWrapper>
         <ButtonWrapper>
-          <Button value="Cancel" onClick={handleClose} />
+          <Button value="Cancel" onClick={handleClose} className="secondary" />
           <Button value="Create Team" />
         </ButtonWrapper>
       </FormWrapper>

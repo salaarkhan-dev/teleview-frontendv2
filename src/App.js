@@ -11,6 +11,7 @@ import Attendance from "./pages/Attendance";
 import Settings from "./pages/Settings";
 
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
+import TeamsDetail from "./pages/TeamsDetail";
 
 const App = () => {
   return (
@@ -35,6 +36,9 @@ const App = () => {
                     </Route>
                     <Route path="/teams" exact>
                       <Teams />
+                    </Route>
+                    <Route path="/teamdetail" exact>
+                      <TeamsDetail />
                     </Route>
                     <Route path="/jointeams" exact>
                       <JoinTeams />
@@ -70,6 +74,7 @@ const AppContainer = styled.div`
 `;
 const Body = styled(Container)`
   margin-top: 10px;
+  height: 100%;
 `;
 
 const Background = styled.div`

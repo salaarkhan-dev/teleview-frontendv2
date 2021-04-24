@@ -1,22 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 
-const TextField = ({ name, placeholder, width, height }) => {
+const TextArea = ({ name, placeholder, width, height, children }) => {
   return (
-    <TextFieldContainer width={width} height={height}>
-      <input
-        type="text"
-        name={name}
-        placeholder={placeholder ? placeholder : "placeholder"}
-      />
-    </TextFieldContainer>
+    <TextAreaContainer width={width} height={height}>
+      <textarea placeholder={placeholder} name={name}>
+        {children}
+      </textarea>
+    </TextAreaContainer>
   );
 };
 
-export default TextField;
+export default TextArea;
 
-const TextFieldContainer = styled.div`
-  width: ${({ width }) => (width ? width : "inherit")};
+const TextAreaContainer = styled.div`
+  width: ${({ width }) => (width ? width : "5inherit")};
   height: ${({ height }) => (height ? height : "40px")};
   background: radial-gradient(
     100% 249.45% at 0% 2.78%,
@@ -31,7 +29,7 @@ const TextFieldContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  input {
+  textarea {
     font-family: Poppins;
     font-style: normal;
     font-weight: normal;
@@ -44,6 +42,14 @@ const TextFieldContainer = styled.div`
     color: rgba(255, 255, 255, 0.8);
     margin: 0;
     padding: 0;
+    resize: none;
+
+    scroll-behavior: smooth;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 
     @media (max-width: 768px) {
       font-size: 12px;
