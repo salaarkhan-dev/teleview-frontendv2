@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/static/css/main.8144384f.chunk.css",
-    "main.js": "/static/js/main.7dbad544.chunk.js",
-    "main.js.map": "/static/js/main.7dbad544.chunk.js.map",
+    "main.js": "/static/js/main.a1eb0f5b.chunk.js",
+    "main.js.map": "/static/js/main.a1eb0f5b.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.f7c28b74.js",
     "runtime-main.js.map": "/static/js/runtime-main.f7c28b74.js.map",
-    "static/css/2.5c573378.chunk.css": "/static/css/2.5c573378.chunk.css",
-    "static/js/2.1b5f1be3.chunk.js": "/static/js/2.1b5f1be3.chunk.js",
-    "static/js/2.1b5f1be3.chunk.js.map": "/static/js/2.1b5f1be3.chunk.js.map",
+    "static/css/2.4c97ca4f.chunk.css": "/static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.e425da3a.chunk.js": "/static/js/2.e425da3a.chunk.js",
+    "static/js/2.e425da3a.chunk.js.map": "/static/js/2.e425da3a.chunk.js.map",
     "index.html": "/index.html",
-    "static/css/2.5c573378.chunk.css.map": "/static/css/2.5c573378.chunk.css.map",
+    "static/css/2.4c97ca4f.chunk.css.map": "/static/css/2.4c97ca4f.chunk.css.map",
     "static/css/main.8144384f.chunk.css.map": "/static/css/main.8144384f.chunk.css.map",
-    "static/js/2.1b5f1be3.chunk.js.LICENSE.txt": "/static/js/2.1b5f1be3.chunk.js.LICENSE.txt",
+    "static/js/2.e425da3a.chunk.js.LICENSE.txt": "/static/js/2.e425da3a.chunk.js.LICENSE.txt",
     "static/media/1.539f1d57.png": "/static/media/1.539f1d57.png",
     "static/media/Vector-1.b5f9ed18.svg": "/static/media/Vector-1.b5f9ed18.svg",
     "static/media/Vector-2.565ad165.svg": "/static/media/Vector-2.565ad165.svg",
@@ -19,14 +19,17 @@
     "static/media/Vector-4.518f7e1d.svg": "/static/media/Vector-4.518f7e1d.svg",
     "static/media/Vector.3b744b68.svg": "/static/media/Vector.3b744b68.svg",
     "static/media/attach.997f20c9.svg": "/static/media/attach.997f20c9.svg",
+    "static/media/cancel.ee261cc2.svg": "/static/media/cancel.ee261cc2.svg",
+    "static/media/haarcascade_eye.78bf7b65.xml": "/static/media/haarcascade_eye.78bf7b65.xml",
+    "static/media/haarcascade_frontalface_default.deb07a73.xml": "/static/media/haarcascade_frontalface_default.deb07a73.xml",
     "static/media/logout1.79e7a06c.svg": "/static/media/logout1.79e7a06c.svg",
-    "static/media/menu.9dc3699b.svg": "/static/media/menu.9dc3699b.svg"
+    "static/media/menu.d562bf5b.svg": "/static/media/menu.d562bf5b.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.f7c28b74.js",
-    "static/css/2.5c573378.chunk.css",
-    "static/js/2.1b5f1be3.chunk.js",
+    "static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.e425da3a.chunk.js",
     "static/css/main.8144384f.chunk.css",
-    "static/js/main.7dbad544.chunk.js"
+    "static/js/main.a1eb0f5b.chunk.js"
   ]
 }
