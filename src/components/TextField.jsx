@@ -1,13 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 
-const TextField = ({ name, placeholder, width, height }) => {
+const TextField = ({ name, placeholder, width, height, ...otherProps }) => {
   return (
     <TextFieldContainer width={width} height={height}>
       <input
         type="text"
         name={name}
         placeholder={placeholder ? placeholder : "placeholder"}
+        {...otherProps}
       />
     </TextFieldContainer>
   );

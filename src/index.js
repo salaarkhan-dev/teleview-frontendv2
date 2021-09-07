@@ -10,12 +10,25 @@ import * as serviceWorker from "./serviceWorker";
 import persistStore from "redux-persist/es/persistStore";
 import { PersistGate } from "redux-persist/integration/react";
 
+import { SnackbarProvider } from "notistack";
+import { BrowserRouter } from "react-router-dom";
+
 let persistor = persistStore(store);
 
 ReactDOM.render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <App />
+      <BrowserRouter>
+        <SnackbarProvider
+          maxSnack={4}
+          anchorOrigin={{
+            vertical: "top",
+            horizontal: "right",
+          }}
+        >
+          <App />
+        </SnackbarProvider>
+      </BrowserRouter>
     </PersistGate>
   </Provider>,
   document.getElementById("root")

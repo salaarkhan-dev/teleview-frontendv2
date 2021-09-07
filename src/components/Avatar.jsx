@@ -16,8 +16,9 @@ const AvatarGlass = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: ${({ width }) => (width ? width : "4.3rem")};
-  height: ${({ height }) => (height ? height : "4.3rem")};
+  /* width: ${({ width }) => (width ? width : "4.3rem")};
+  height: ${({ height }) => (height ? height : "4.3rem")}; */
+  padding: 3px;
 
   background: radial-gradient(
     100% 249.45% at 0% 2.78%,
@@ -29,18 +30,21 @@ const AvatarGlass = styled.div`
   border-radius: ${({ radius }) => (radius ? radius : "20px")};
 
   @media (max-width: 768px) {
-    width: 3.125rem;
-    height: 3.0625rem;
-    border-radius: 15px;
-  }
-  @media (max-width: 480px) {
-    width: 3.3rem;
-    height: 2.8rem;
+    width: 3.5rem;
+    height: 3.5rem;
     border-radius: 10px;
   }
 
   img {
-    width: 100%;
-    height: 100%;
+    width: ${({ width }) => (width ? width : "4.3rem")};
+    height: ${({ height }) => (height ? height : "4.3rem")};
+    border-radius: ${({ radius }) => (radius ? radius : "20px")};
+    object-fit: cover;
+    @media (max-width: 768px) {
+      width: 3.2rem;
+      height: 3.2rem;
+      border-radius: 12px;
+      padding: 2px;
+    }
   }
 `;

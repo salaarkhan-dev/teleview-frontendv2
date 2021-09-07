@@ -2,22 +2,22 @@ import React from "react";
 import styled from "styled-components";
 import Table from "../components/Table";
 
-const Attendance = () => {
+const AttendanceDetail = (props) => {
   return (
-    <AttendanceContainer>
-      <h1 className="page-title">Attendance</h1>
-      <AttendanceWrapper>
-        <Table />
-      </AttendanceWrapper>
-    </AttendanceContainer>
+    <AttendanceDetailContainer>
+      <h1 className="page-title">AttendanceDetail</h1>
+      <AttendanceDetailWrapper>
+        <Table meetinglist />
+      </AttendanceDetailWrapper>
+    </AttendanceDetailContainer>
   );
 };
 
-export default Attendance;
+export default AttendanceDetail;
 
-const AttendanceWrapper = styled.div``;
+const AttendanceDetailWrapper = styled.div``;
 
-const AttendanceContainer = styled.div`
+const AttendanceDetailContainer = styled.div`
   .page-title {
     font-family: "Poppins";
     font-style: normal;

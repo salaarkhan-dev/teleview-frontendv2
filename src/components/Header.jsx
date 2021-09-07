@@ -1,14 +1,40 @@
 import React from "react";
 import styled from "styled-components";
-import Dp from "../assets/avatars/1.png";
 import { Container, Row, Col } from "reactstrap";
 import { Link } from "react-router-dom";
 import Avatar from "./Avatar";
+import { ReactComponent as MenuIcon } from "../assets/icons/menu.svg";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectorAvatar,
+  selectorIsAuthenticated,
+  selectorName,
+} from "../features/authentication/authSlice";
+import { selectorUsername } from "./../features/authentication/authSlice";
+import {
+  selectorSidebarToggle,
+  sidebarToggler,
+} from "../features/sidebar/sidebarSlice";
 
 const Header = () => {
+  const isAuthenticated = useSelector(selectorIsAuthenticated);
+  const username = useSelector(selectorUsername);
+  const name = useSelector(selectorName);
+  const avatar = useSelector(selectorAvatar);
+  const sidebarToggle = useSelector(selectorSidebarToggle);
+  const dispatch = useDispatch();
+
+  const toggleSideBar = () => {
+    dispatch(sidebarToggler(sidebarToggle));
+  };
   return (
     <HeaderContainer fluid="md">
       <HeaderRow md={12}>
+        {isAuthenticated && (
+          <Menu onClick={toggleSideBar}>
+            <MenuIcon width={20} />
+          </Menu>
+        )}
         <Col>
           <HeaderLeft>
             <Link to="/">
@@ -18,17 +44,21 @@ const Header = () => {
           </HeaderLeft>
         </Col>
         <Col>
-          <HeaderRight>
-            <Link to="/profile">
-              <UserInfo>
-                <h3>Salaar Khan</h3>
-                <small>@noman</small>
-              </UserInfo>
-            </Link>
-            <Link to="/profile">
-              <Avatar src={Dp} />
-            </Link>
-          </HeaderRight>
+          {isAuthenticated && (
+            <HeaderRight>
+              <Link to="/settings">
+                <UserInfo>
+                  <h3 style={{ textTransform: "capitalize" }}>{name}</h3>
+                  <small style={{ textTransform: "lowercase" }}>
+                    @{username}
+                  </small>
+                </UserInfo>
+              </Link>
+              <Link to="/settings">
+                <Avatar src={avatar} />
+              </Link>
+            </HeaderRight>
+          )}
         </Col>
       </HeaderRow>
     </HeaderContainer>
@@ -36,6 +66,13 @@ const Header = () => {
 };
 
 export default Header;
+
+const Menu = styled(Col)`
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
 
 const HeaderContainer = styled(Container)`
   margin-top: 20px;

@@ -3,7 +3,12 @@ import {
   configureStore,
   getDefaultMiddleware,
 } from "@reduxjs/toolkit";
-import counterReducer from "../features/counter/counterSlice";
+import authReducer from "../features/authentication/authSlice";
+import teamsReducer from "../features/teams/teamsSlice";
+import postsReducer from "../features/posts/postSlice";
+import meetingReducer from "../features/meeting/meetingSlice";
+import attendanceReducer from "../features/attendance/attendanceSlice";
+import sidebarReducer from "../features/sidebar/sidebarSlice";
 import storage from "redux-persist/lib/storage";
 import {
   persistReducer,
@@ -16,7 +21,12 @@ import {
 } from "redux-persist";
 
 const reducers = combineReducers({
-  counter: counterReducer,
+  auth: authReducer,
+  teams: teamsReducer,
+  posts: postsReducer,
+  meeting: meetingReducer,
+  attendance: attendanceReducer,
+  sidebar: sidebarReducer,
 });
 
 const persistConfig = {

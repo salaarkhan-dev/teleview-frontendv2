@@ -5,8 +5,36 @@ import styled from "styled-components";
 import Button from "../components/Button";
 import Card from "./../components/Card";
 import Modal from "./../components/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  fetchTeamsAsync,
+  selectorCount,
+  selectorIsLoading,
+  selectorTeams,
+} from "../features/teams/teamsSlice";
+import CustomProgressBar from "../components/CustomProgressBar";
 
 const JoinTeams = () => {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectorIsLoading);
+  const count = useSelector(selectorCount);
+  const joinTeams = useSelector(selectorTeams);
+
+  const [page, setPage] = React.useState(1);
+
+  React.useEffect(() => {
+    async function fetchTeams(obj) {
+      await dispatch(fetchTeamsAsync(obj));
+    }
+    fetchTeams({
+      joined: false,
+      page: page,
+    });
+  }, [dispatch, page]);
+
+  const handlePageChange = (e, value) => {
+    setPage(value);
+  };
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => {
     setOpen(true);
@@ -23,19 +51,44 @@ const JoinTeams = () => {
             <Button value="Create Team" onClick={handleOpen} />
           </ButtonWrapper>
         </HeaderContainer>
-        <CardWrapper>
-          <CardsContainer>
-            <Card btnValue="Join Team" />
-            <Card btnValue="Join Team" />
-            <Card btnValue="Join Team" />
-            <Card btnValue="Join Team" />
-            <Card btnValue="Join Team" />
-            <Card btnValue="Join Team" />
-          </CardsContainer>
-        </CardWrapper>
-        <PaginationWrapper>
-          <CustomPagination count={5} page={1} size="small" />
-        </PaginationWrapper>
+        {isLoading ? (
+          <ProgressBarWrapper>
+            <CustomProgressBar />
+          </ProgressBarWrapper>
+        ) : (
+          <>
+            {joinTeams?.length ? (
+              <>
+                <CardWrapper>
+                  <CardsContainer>
+                    {joinTeams.map((joinTeam, id) => {
+                      return (
+                        <Card
+                          key={id}
+                          btnValue="Join Team"
+                          {...joinTeam}
+                          joinable
+                        />
+                      );
+                    })}
+                  </CardsContainer>
+                </CardWrapper>
+                {count > 1 ? (
+                  <PaginationWrapper>
+                    <CustomPagination
+                      count={count}
+                      page={page}
+                      size="small"
+                      onChange={handlePageChange}
+                    />
+                  </PaginationWrapper>
+                ) : null}
+              </>
+            ) : (
+              <h1>No Teams Available To Join!</h1>
+            )}
+          </>
+        )}
       </JoinTeamsContainer>
       <ModalContainer open={open}>
         <ModalWrapper>
@@ -47,6 +100,15 @@ const JoinTeams = () => {
 };
 
 export default JoinTeams;
+
+const ProgressBarWrapper = styled.div`
+  height: 70%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 
 const ButtonWrapper = styled.div`
   display: flex;
@@ -147,6 +209,20 @@ const JoinTeamsContainer = styled(Container)`
   align-items: center;
   height: 100vh;
   width: 100%;
+  h1 {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    @media (max-width: 768px) {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  }
   .page-title {
     font-family: "Poppins";
     font-style: normal;
@@ -154,9 +230,11 @@ const JoinTeamsContainer = styled(Container)`
     font-size: 20px;
     line-height: 30px;
     color: #ffffff;
+    width: 100%;
+    opacity: 0.8;
 
     @media (max-width: 768px) {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 `;

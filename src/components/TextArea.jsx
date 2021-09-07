@@ -1,12 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-const TextArea = ({ name, placeholder, width, height, children }) => {
+const TextArea = ({ name, placeholder, width, height, ...otherProps }) => {
   return (
     <TextAreaContainer width={width} height={height}>
-      <textarea placeholder={placeholder} name={name}>
-        {children}
-      </textarea>
+      <textarea placeholder={placeholder} name={name} {...otherProps} />
     </TextAreaContainer>
   );
 };

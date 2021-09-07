@@ -5,44 +5,39 @@ import { useDispatch } from "react-redux";
 import { useStore } from "react-redux";
 import styled from "styled-components";
 import {
-  createTeamAsync,
-  selectorDropdownValue,
+  createMeetingAsync,
   selectorIsLoading,
-} from "../features/teams/teamsSlice";
+} from "../features/meeting/meetingSlice";
 import Button from "./Button";
-import DropDown from "./DropDown";
-import TextArea from "./TextArea";
 import TextField from "./TextField";
 import CustomSpinner from "./CustomSpinner";
+import { useHistory, useLocation } from "react-router";
 
-const Modal = ({ handleClose }) => {
+const CreateMeetingModal = ({ handleClose }) => {
   const { enqueueSnackbar } = useSnackbar();
+  const location = useLocation();
   const store = useStore();
+  const history = useHistory();
   const isLoading = useSelector(selectorIsLoading);
-  const selectPrivacy = useSelector(selectorDropdownValue);
   const dispatch = useDispatch();
   const [state, setState] = React.useState({
-    name: "",
-    description: "",
-    privacy: selectPrivacy,
+    title: "",
+    location: location.pathname,
   });
-
-  React.useEffect(() => {
-    setState((state) => ({
-      ...state,
-      privacy: selectPrivacy,
-    }));
-  }, [selectPrivacy]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await dispatch(createTeamAsync(state));
-    if (store.getState().teams.isCreated) {
-      enqueueSnackbar("Team is created successfully!", {
+    await dispatch(createMeetingAsync(state));
+    if (store.getState().meeting.isCreated) {
+      enqueueSnackbar("Meeting is created successfully!", {
         variant: "success",
       });
+
+      history.push(
+        `${state.location}/meeting/${store.getState().meeting.meetingIDs}`
+      );
     } else {
-      enqueueSnackbar("An error occured while creating team!", {
+      enqueueSnackbar("An error occured while creating Meeting!", {
         variant: "error",
       });
     }
@@ -57,31 +52,26 @@ const Modal = ({ handleClose }) => {
   return (
     <ModalContainer>
       <TitleWrapper>
-        <h4>Create Team</h4>
+        <h4>Create Meeting</h4>
       </TitleWrapper>
       <FormWrapper>
         <TextFieldWrapper>
           <TextField
-            placeholder="Name"
-            name="name"
-            value={state.name}
+            placeholder="Title"
+            name="title"
+            value={state.title}
             onChange={handleChange}
             required
           />
-          <TextArea
-            height="80px"
-            placeholder="Description"
-            name="description"
-            value={state.description}
-            onChange={handleChange}
-            required
-          />
-          <DropDown />
         </TextFieldWrapper>
         <ButtonWrapper>
           <Button value="Cancel" onClick={handleClose} className="secondary" />
           {(isLoading && <CustomSpinner />) || (
-            <Button value="Create Team" type="submit" onClick={handleSubmit} />
+            <Button
+              value="Create Meeting"
+              type="submit"
+              onClick={handleSubmit}
+            />
           )}
         </ButtonWrapper>
       </FormWrapper>
@@ -89,7 +79,7 @@ const Modal = ({ handleClose }) => {
   );
 };
 
-export default Modal;
+export default CreateMeetingModal;
 
 const TitleWrapper = styled.div`
   h4 {
@@ -101,7 +91,6 @@ const TitleWrapper = styled.div`
 
     mix-blend-mode: normal;
     opacity: 0.8;
-    margin-top: 8px;
     @media (max-width: 480px) {
       font-size: 20px;
     }
@@ -124,8 +113,8 @@ const ButtonWrapper = styled.div`
 `;
 
 const ModalContainer = styled.div`
-  width: 500px;
-  height: 400px;
+  width: 300px;
+  height: 200px;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -138,9 +127,4 @@ const ModalContainer = styled.div`
   );
   box-shadow: 0px 4px 16px rgba(23, 18, 43, 0.7);
   border-radius: 10px;
-  @media (max-width: 480px) {
-    width: 380px;
-    height: 360px;
-    z-index: 1;
-  }
 `;

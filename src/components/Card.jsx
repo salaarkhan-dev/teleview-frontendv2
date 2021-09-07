@@ -1,19 +1,63 @@
+import { useSnackbar } from "notistack";
 import React from "react";
+import { useDispatch, useStore } from "react-redux";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
+import { joinTeamsAsync } from "../features/teams/teamsSlice";
 import Avatar from "./Avatar";
 import Button from "./Button";
 
-const Card = ({ btnValue }) => {
+const Card = ({ btnValue, name, description, channels, slug, joinable }) => {
+  const dispatch = useDispatch();
+  const { enqueueSnackbar } = useSnackbar();
+  const history = useHistory();
+  const store = useStore();
+  const handleClick = async () => {
+    try {
+      await dispatch(
+        joinTeamsAsync({
+          slug: slug,
+        })
+      );
+      if (store.getState().teams.isJoined && !store.getState().teams.isSent) {
+        enqueueSnackbar("Team joined successfully!", {
+          variant: "success",
+        });
+        history.push(`/teams/${slug}/channels/${channels[0].slug}`);
+      } else if (store.getState().teams.isSent) {
+        enqueueSnackbar("Request sent successfully!", {
+          variant: "success",
+        });
+      } else if (store.getState().teams.error) {
+        enqueueSnackbar(store.getState().teams.error, {
+          variant: "error",
+        });
+      }
+    } catch (error) {
+      enqueueSnackbar(
+        "An error occured while joining team. please try again!",
+        {
+          variant: "error",
+        }
+      );
+    }
+  };
   return (
     <CardContainer>
       <CardWrapper>
         <Avatar />
-        <h4>Team Name</h4>
-        <h5>
-          Lorem, ipsum dolor sit amet conjk ddjfh jjh sectetur adipisicing elit.
-          Maxime, aspernatur!
-        </h5>
-        <Button value={btnValue ? btnValue : "Default"} />
+        <h4>{name ? name.substring(0, 20) + "..." : null}</h4>
+        <h5>{description ? description.substring(0, 24) + "..." : null}</h5>
+        {joinable ? (
+          <Button
+            value={btnValue ? btnValue : "Default"}
+            onClick={handleClick}
+          />
+        ) : (
+          <Link to={`/teams/${slug}/channels/${channels[0].slug}`}>
+            <Button value={btnValue ? btnValue : "Default"} />
+          </Link>
+        )}
       </CardWrapper>
     </CardContainer>
   );
@@ -38,6 +82,10 @@ const CardWrapper = styled.div`
     font-size: 18px;
     text-align: center;
     color: rgba(255, 255, 255, 0.9);
+
+    @media (max-width: 480px) {
+      font-size: 14px;
+    }
   }
 
   h5 {

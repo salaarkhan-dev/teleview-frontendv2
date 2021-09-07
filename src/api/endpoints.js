@@ -3,6 +3,16 @@ export const API_URL =
     ? process.env.REACT_APP_PROD_API_URL
     : process.env.REACT_APP_DEV_API_URL;
 
+export const MEDIA_URL =
+  process.env.NODE_ENV === "production"
+    ? process.env.REACT_APP_PROD_MEDIA_URL
+    : process.env.REACT_APP_DEV_MEDIA_URL;
+
+export const SOCKET_URL =
+  process.env.NODE_ENV === "production"
+    ? process.env.REACT_APP_PROD_WSS_URL
+    : process.env.REACT_APP_DEV_WS_URL;
+
 // Users endpoints
 export const USER_URL = API_URL + "users/";
 export const USER_REGISTER_URL = USER_URL + "register/";

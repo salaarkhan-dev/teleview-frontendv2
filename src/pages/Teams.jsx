@@ -3,32 +3,88 @@ import React from "react";
 import { Container } from "reactstrap";
 import styled from "styled-components";
 import Card from "./../components/Card";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import {
+  fetchTeamsAsync,
+  selectorCount,
+  selectorIsLoading,
+  selectorTeams,
+} from "../features/teams/teamsSlice";
+import CustomProgressBar from "../components/CustomProgressBar";
 
 const Teams = () => {
+  const dispatch = useDispatch();
+  const isLoading = useSelector(selectorIsLoading);
+  const count = useSelector(selectorCount);
+  const teams = useSelector(selectorTeams);
+
+  const [page, setPage] = React.useState(1);
+
+  React.useEffect(() => {
+    async function fetchTeams(obj) {
+      await dispatch(fetchTeamsAsync(obj));
+    }
+    fetchTeams({
+      joined: true,
+      page: page,
+    });
+  }, [dispatch, page]);
+
+  const handlePageChange = (e, value) => {
+    setPage(value);
+  };
   return (
     <TeamsContainer fluid="md">
       <HeaderContainer>
         <h1 className="page-title">Teams</h1>
       </HeaderContainer>
-      <CardWrapper>
-        <CardsContainer>
-          <Card btnValue="View Team" />
-          <Card btnValue="View Team" />
-          <Card btnValue="View Team" />
-          <Card btnValue="View Team" />
-          <Card btnValue="View Team" />
-          <Card btnValue="View Team" />
-        </CardsContainer>
-      </CardWrapper>
-      <PaginationWrapper>
-        <CustomPagination count={5} page={1} size="small" />
-      </PaginationWrapper>
+
+      {isLoading ? (
+        <ProgressBarWrapper>
+          <CustomProgressBar />
+        </ProgressBarWrapper>
+      ) : (
+        <>
+          {teams?.length ? (
+            <>
+              <CardWrapper>
+                <CardsContainer>
+                  {teams.map((team, id) => {
+                    return <Card key={id} btnValue="View Team" {...team} />;
+                  })}
+                </CardsContainer>
+              </CardWrapper>
+              {count > 1 ? (
+                <PaginationWrapper>
+                  <CustomPagination
+                    count={count}
+                    page={page}
+                    size="small"
+                    onChange={handlePageChange}
+                  />
+                </PaginationWrapper>
+              ) : null}
+            </>
+          ) : (
+            <h1>No Teams Joined or Created Yet!</h1>
+          )}
+        </>
+      )}
     </TeamsContainer>
   );
 };
 
 export default Teams;
 
+const ProgressBarWrapper = styled.div`
+  height: 70%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 const HeaderContainer = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -104,6 +160,20 @@ const TeamsContainer = styled(Container)`
   align-items: center;
   height: 100vh;
   width: 100%;
+  h1 {
+    font-family: Poppins;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    opacity: 0.8;
+    display: flex;
+    align-items: center;
+    color: #ffffff;
+    @media (max-width: 768px) {
+      font-size: 16px;
+      margin-top: 10px;
+    }
+  }
   .page-title {
     font-family: "Poppins";
     font-style: normal;
@@ -113,7 +183,7 @@ const TeamsContainer = styled(Container)`
     color: #ffffff;
 
     @media (max-width: 768px) {
-      font-size: 18px;
+      font-size: 16px;
     }
   }
 `;

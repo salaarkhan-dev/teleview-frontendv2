@@ -19,5 +19,11 @@ const DashboardContainer = styled.div`
     font-size: 20px;
     line-height: 30px;
     color: #ffffff;
+    width: 100%;
+    opacity: 0.8;
+
+    @media (max-width: 768px) {
+      font-size: 16px;
+    }
   }
 `;

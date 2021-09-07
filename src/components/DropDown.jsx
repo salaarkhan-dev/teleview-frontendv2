@@ -1,11 +1,18 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import styled from "styled-components";
 import icon from "../assets/icons/logout1.svg";
+import { changePrivacy } from "../features/teams/teamsSlice";
 
 const DropDown = () => {
+  const dispatch = useDispatch();
+  const handleChange = (e) => {
+    const value = e.target.value;
+    dispatch(changePrivacy(value));
+  };
   return (
     <CustomDropdownContainer>
-      <CustomDropdown placeholder="Privacy" icon={icon}>
+      <CustomDropdown placeholder="Privacy" icon={icon} onChange={handleChange}>
         <option value="public">Public</option>
         <option value="private">Private</option>
       </CustomDropdown>
@@ -22,9 +29,13 @@ const CustomDropdown = styled.select`
   outline: none;
   border: none;
   color: rgba(255, 255, 255, 0.4);
+  font-size: 16px;
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
+  @media (max-width: 480px) {
+    font-size: 12px;
+  }
   option {
     color: black;
     border-radius: 5px;

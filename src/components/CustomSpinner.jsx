@@ -1,29 +1,30 @@
 import React from "react";
+import { Spinner } from "reactstrap";
 import styled from "styled-components";
 
-const Button = ({ value, className, ...buttonProps }) => {
+function CustomSpinner({ size, className, ...spinnerProps }) {
   return (
-    <>
-      <CustomButton
-        type="button"
-        className={className ? className : "primary"}
-        value={value ? value : "Button"}
-        {...buttonProps}
-      />
-    </>
+    <CustomSpinnerContainer
+      className={className ? className : "primary"}
+      {...spinnerProps}
+    >
+      <Spinner size={size ? size : "sm"} />
+    </CustomSpinnerContainer>
   );
-};
+}
 
-export default Button;
+export default CustomSpinner;
 
-const CustomButton = styled.input`
+const CustomSpinnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: none;
   outline: none;
+  cursor: not-allowed;
   width: ${({ width }) => (width ? width : "149px")};
 
   height: ${({ height }) => (height ? height : "34px")};
-  padding: 2px 5px;
-  text-overflow: ellipsis;
 
   font-family: Poppins;
   font-style: normal;
@@ -58,11 +59,10 @@ const CustomButton = styled.input`
     height: 35px;
     font-size: 12px;
   }
-  @media (max-width: 480px) {
+  @media (max-width: 415px) {
     width: 90px;
     height: 35px;
     font-size: 12px;
     border-radius: 7px;
-    font-size: 10px;
   }
 `;

@@ -6,14 +6,22 @@ import Header from "./components/Header";
 import { Container } from "reactstrap";
 import Teams from "./pages/Teams";
 import JoinTeams from "./pages/JoinTeams";
-import Profile from "./pages/Profile";
 import Attendance from "./pages/Attendance";
 import Settings from "./pages/Settings";
 
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import TeamsDetail from "./pages/TeamsDetail";
+import TeamDetail from "./pages/TeamDetail";
+import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
+import { useSelector } from "react-redux";
+import { selectorIsAuthenticated } from "./features/authentication/authSlice";
+import Meeting from "./pages/Meeting";
+import AttendanceDetail from "./pages/AttendanceDetail";
+import AttendanceDetailMeeting from "./pages/AttendanceDetailMeeting";
 
 const App = () => {
+  const isAuthenticated = useSelector(selectorIsAuthenticated);
+
   return (
     <Background>
       <BrowserRouter>
@@ -21,43 +29,74 @@ const App = () => {
           <EllipseOne />
           <EllipseTwo />
           <EllipseThree />
-          <Switch>
-            <GlassContainer>
-              <Glass>
-                <SideBar />
-                <AppContainer>
-                  <Header />
-                  <Body fluid="md">
-                    <Route path="/" exact>
-                      <Redirect to="/dashboard" exact />
-                    </Route>
-                    <Route path="/dashboard" exact>
-                      <Dashboard />
-                    </Route>
-                    <Route path="/teams" exact>
-                      <Teams />
-                    </Route>
-                    <Route path="/teamdetail" exact>
-                      <TeamsDetail />
-                    </Route>
-                    <Route path="/jointeams" exact>
-                      <JoinTeams />
-                    </Route>
-                    <Route path="/profile" exact>
-                      <Profile />
-                    </Route>
-                    <Route path="/attendance" exact>
-                      <Attendance />
-                    </Route>
-                    <Route path="/settings" exact>
-                      <Settings />
-                    </Route>
-                  </Body>
-                </AppContainer>
-              </Glass>
-            </GlassContainer>
-            {/* <Redirect to="/dashboard" /> */}
-          </Switch>
+          <GlassContainer>
+            <Glass>
+              {isAuthenticated && <SideBar />}
+              <AppContainer>
+                <Header />
+                <Body fluid="md">
+                  {!isAuthenticated ? (
+                    <Switch>
+                      <Route path="/" exact>
+                        <Redirect to="/signin" />
+                      </Route>
+                      <Route path="/signin" exact>
+                        <SignIn />
+                      </Route>
+                      <Route path="/signup" exact>
+                        <SignUp />
+                      </Route>
+                      <Redirect to="/" />
+                    </Switch>
+                  ) : (
+                    <Switch>
+                      <Route path="/" exact>
+                        <Redirect to="/dashboard" exact />
+                      </Route>
+                      <Route path="/dashboard" exact>
+                        <Dashboard />
+                      </Route>
+                      <Route path="/teams" exact>
+                        <Teams />
+                      </Route>
+                      <Route
+                        path="/teams/:slug/channels/:channelSlug"
+                        render={(props) => <TeamDetail {...props} />}
+                        exact
+                      />
+                      <Route
+                        path="/teams/:slug/channels/:channelSlug/meeting/:meetingId"
+                        render={(props) => <Meeting {...props} />}
+                        exact
+                      />
+                      <Route path="/jointeams" exact>
+                        <JoinTeams />
+                      </Route>
+                      <Route path="/attendance" exact>
+                        <Attendance />
+                      </Route>
+                      <Route
+                        path="/attendance/:slug"
+                        render={(props) => <AttendanceDetail {...props} />}
+                        exact
+                      />
+                      <Route
+                        path="/attendance/:slug/:id"
+                        render={(props) => (
+                          <AttendanceDetailMeeting {...props} />
+                        )}
+                        exact
+                      />
+                      <Route path="/settings" exact>
+                        <Settings />
+                      </Route>
+                      <Redirect to="/" />
+                    </Switch>
+                  )}
+                </Body>
+              </AppContainer>
+            </Glass>
+          </GlassContainer>
         </Glows>
       </BrowserRouter>
     </Background>

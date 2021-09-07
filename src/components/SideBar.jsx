@@ -1,20 +1,42 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { ReactComponent as Team } from "../assets/icons/Vector-1.svg";
 import { ReactComponent as Search } from "../assets/icons/Vector-2.svg";
 import { ReactComponent as Attendance } from "../assets/icons/Vector-3.svg";
 import { ReactComponent as Home } from "../assets/icons/Vector-4.svg";
 import { ReactComponent as Setting } from "../assets/icons/Vector.svg";
 import { ReactComponent as Logout } from "../assets/icons/logout1.svg";
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "../features/authentication/authSlice";
+import { selectorSidebarToggle } from "../features/sidebar/sidebarSlice";
 
 const SideBar = () => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const history = useHistory();
+  const dispatch = useDispatch();
+  const sidebarToggle = useSelector(selectorSidebarToggle);
+
   const handleMenuItemClick = (index) => {
     setSelectedIndex(index);
   };
+  React.useEffect(() => {
+    const data = localStorage.getItem("selected-index");
+    if (data) {
+      setSelectedIndex(JSON.parse(data));
+    }
+  }, []);
+
+  React.useEffect(() => {
+    localStorage.setItem("selected-index", JSON.stringify(selectedIndex));
+  });
+  const handleLogout = () => {
+    console.log("logout");
+    dispatch(logout());
+    history.push("/");
+  };
   return (
-    <SideBarContainer>
+    <SideBarContainer sidebarToggle={sidebarToggle}>
       <Icons>
         <Link to="/dashboard">
           <HomeIcon
@@ -47,10 +69,7 @@ const SideBar = () => {
           />
         </Link>
         <Link to="/logout">
-          <LogoutIcon
-            active={`${selectedIndex === 5}`}
-            onClick={() => handleMenuItemClick(5)}
-          />
+          <LogoutIcon onClick={() => handleLogout()} />
         </Link>
       </Icons>
     </SideBarContainer>
@@ -77,6 +96,7 @@ const SideBarContainer = styled.div`
     width: 45px;
     height: 300px;
     border-radius: 12px;
+    visibility: ${(props) => (props.sidebarToggle ? "visible" : "hidden")};
   }
 `;
 const HomeIcon = styled(Home)`
