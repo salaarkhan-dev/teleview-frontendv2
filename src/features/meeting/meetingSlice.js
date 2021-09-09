@@ -110,6 +110,7 @@ const meetingSlice = createSlice({
     [fetchMeetingDetailAsync.fulfilled]: (state, { payload }) => {
       state.meeting_members = payload.meeting_members;
       state.meeting = payload;
+      state.meetingTitle = payload.title;
       state.isLoading = false;
     },
     [fetchMeetingDetailAsync.rejected]: (state, action) => {

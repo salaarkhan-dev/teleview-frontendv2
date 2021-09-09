@@ -156,24 +156,17 @@ const Member = ({
                 </OwnerBadge>
               ) : null}
               {isOwner && !is_organizer ? (
-                <>
+                <MembersAttentivnessWrapper>
                   <span style={{ textTransform: "capitalize" }}>
                     {expression?.length > 0 ? expression : "Neutral"}
                   </span>
                   <span>
                     {attentiveness_score
-                      ? attentiveness_score.toFixed(0)
-                      : "NaN"}
-                    %
+                      ? attentiveness_score.toFixed(0) + "%"
+                      : null}
                   </span>
-                  <Button
-                    value="Remove"
-                    width="60px"
-                    height="20px"
-                    radius="6px"
-                    fontSize="12px"
-                  />
-                </>
+                  <RemoveButton value="Remove" />
+                </MembersAttentivnessWrapper>
               ) : null}
             </>
           ) : null}
@@ -232,6 +225,18 @@ const OwnerBadge = styled.div`
     color: #fff;
     opacity: 1;
   }
+`;
+const RemoveButton = styled(Button)`
+  width: 60px;
+  height: 20px;
+  border-radius: 6px;
+  font-size: 10px;
+`;
+const MembersAttentivnessWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 5px;
 `;
 const MemberContainer = styled.div`
   display: flex;

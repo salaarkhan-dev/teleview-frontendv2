@@ -26,6 +26,9 @@ import faceCascadeFile from "../assets/cascade/haarcascade_frontalface_default.x
 import eyeCascadeFile from "../assets/cascade/haarcascade_eye.xml";
 import axios from "axios";
 import { SOCKET_URL } from "../api/endpoints";
+import MeetingOwnerView from "./../components/MeetingOwnerView";
+import CustomProgressBar from "./../components/CustomProgressBar";
+import MeetingMemberView from "../components/MeetingMemberView";
 
 const Meeting = (props) => {
   const webcamRef = React.useRef(null);
@@ -48,8 +51,9 @@ const Meeting = (props) => {
   async function fetchMeetingDetail(obj) {
     await dispatch(fetchMeetingDetailAsync(obj));
   }
+
   const runDetector = async () => {
-    axios.get(faceCascadeFile).then((response) => {
+    await axios.get(faceCascadeFile).then((response) => {
       try {
         cv.FS_createDataFile(
           "/",
@@ -63,7 +67,7 @@ const Meeting = (props) => {
         console.log("fs error:" + e);
       }
     });
-    axios.get(eyeCascadeFile).then((response) => {
+    await axios.get(eyeCascadeFile).then((response) => {
       try {
         cv.FS_createDataFile(
           "/",
@@ -372,23 +376,23 @@ const Meeting = (props) => {
         </Right>
       </Head>
       <Body>
-        <ChatArea>
+        <ChatArea isOwner={isOwner}>
           {!isOwner ? (
-            <>
-              <Webcam
+            <MeetingMemberViewContainer>
+              <CustomWebcam
                 audio={false}
+                mirrored
                 ref={webcamRef}
                 screenshotFormat="image/jpeg"
                 videoConstraints={videoConstraints}
-                style={{ height: "100%", width: "100%" }}
               />
-              <canvas ref={outRef} style={{ height: "20%", width: "20%" }} />
-            </>
+              <MeetingMemberView />
+            </MeetingMemberViewContainer>
           ) : (
-            <h2>Owner View later work.</h2>
+            <MeetingOwnerView />
           )}
         </ChatArea>
-        <MemberArea>
+        <MemberArea isOwner={isOwner}>
           <Top>
             <span>Member</span>
           </Top>
@@ -396,9 +400,17 @@ const Meeting = (props) => {
             <MeetingMembersContainer>
               <MeetingMembers>
                 {isLoading || typeof meetingMembers === "undefined" ? (
-                  <>
-                    <h1>Loading</h1>
-                  </>
+                  <div
+                    style={{
+                      display: "flex",
+                      justifyContent: "center",
+                      width: "100%",
+                    }}
+                  >
+                    <CustomProgressBar
+                      style={{ width: "15px", height: "15px" }}
+                    />
+                  </div>
                 ) : meetingMembers.length ? (
                   meetingMembers.map((member, index) => {
                     return <Member meeting key={index} {...member} />;
@@ -416,6 +428,14 @@ const Meeting = (props) => {
 export default Meeting;
 
 const MeetingContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 10px;
+  height: inherit;
+  @media (max-width: 768px) {
+    gap: 5px;
+  }
   .page-title {
     font-family: "Poppins";
     font-style: normal;
@@ -425,13 +445,33 @@ const MeetingContainer = styled.div`
     color: #ffffff;
     width: 100%;
     opacity: 0.8;
-
     @media (max-width: 768px) {
       font-size: 16px;
     }
   }
 `;
 
+const CustomWebcam = styled(Webcam)`
+  height: 100px;
+  width: 100px;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  @media (max-width: 768px) {
+    height: 80px;
+    width: 80px;
+  }
+`;
+const MeetingMemberViewContainer = styled.div`
+  display: flex;
+  flex: 1;
+  margin-top: 10px;
+  position: relative;
+  @media (max-width: 768px) {
+    /* align-items: center; */
+  }
+`;
 const Head = styled.div`
   flex: 0.1;
   display: flex;
@@ -445,7 +485,6 @@ const Left = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-
   span {
     font-family: "Poppins";
     font-style: normal;
@@ -453,7 +492,6 @@ const Left = styled.div`
     font-size: 20px;
     line-height: 30px;
     color: #ffffff;
-
     @media (max-width: 768px) {
       font-size: 18px;
     }
@@ -473,19 +511,19 @@ const Right = styled.div`
 
 const Body = styled.div`
   flex: 0.9;
-  margin-bottom: 10px;
-  height: 100%;
-  width: 100%;
   display: flex;
   justify-content: space-between;
   gap: 10px;
+  margin-bottom: 20px;
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
 `;
 const ChatArea = styled.div`
   flex: 0.8;
   display: flex;
   flex-direction: column;
-  width: 500px;
-  height: 400px;
   padding: 0 15px 15px 15px;
   background: linear-gradient(
     180deg,
@@ -496,8 +534,10 @@ const ChatArea = styled.div`
   box-shadow: 0px 48px 69px rgba(23, 18, 43, 0.8453);
   backdrop-filter: blur(15px);
   border-radius: 15px;
-  @media (max-width: 1200px) {
-    flex: 1;
+
+  @media (max-width: 768px) {
+    box-shadow: 0px 48px 69px rgba(23, 18, 43, 0.4);
+    flex: ${({ isOwner }) => (isOwner ? 0.2 : 0.7)};
   }
 `;
 const MemberArea = styled.div`
@@ -515,9 +555,8 @@ const MemberArea = styled.div`
   box-shadow: 0px 48px 69px rgba(23, 18, 43, 0.8453);
   backdrop-filter: blur(15px);
   border-radius: 10px;
-
-  @media (max-width: 1200px) {
-    display: none;
+  @media (max-width: 768px) {
+    flex: ${({ isOwner }) => (isOwner ? 0.7 : 0.2)};
   }
 `;
 
@@ -549,6 +588,7 @@ const MeetingMembersContainer = styled.div`
   flex-direction: column;
   height: 100%;
   overflow: hidden;
+  margin-left: 5px;
 `;
 const MeetingMembers = styled.div`
   position: absolute;
@@ -560,7 +600,6 @@ const MeetingMembers = styled.div`
   flex-direction: column;
   align-items: center;
   overflow-y: scroll;
-
   span {
     text-align: center;
     font-family: Poppins;

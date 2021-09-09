@@ -2,9 +2,9 @@ import React from "react";
 import { Spinner } from "reactstrap";
 import styled from "styled-components";
 
-function CustomProgressBar() {
+function CustomProgressBar(props) {
   return (
-    <ProgressBarContainer>
+    <ProgressBarContainer {...props}>
       <Spinner
         style={{
           width: "4rem",
@@ -19,4 +19,8 @@ function CustomProgressBar() {
 
 export default CustomProgressBar;
 
-const ProgressBarContainer = styled.div``;
+const ProgressBarContainer = styled.div`
+  display: flex;
+  flex: 1;
+  justify-content: center;
+`;
