@@ -119,7 +119,24 @@ const Body = styled(Container)`
 const Background = styled.div`
   width: 100vw;
   height: 100vh;
-  background: radial-gradient(50% 50% at 50% 50%, #201d47 0%, #17153a 100%);
+  /* background: radial-gradient(50% 50% at 50% 50%, #201d47 0%, #17153a 100%); */
+  background: rgb(32, 29, 71);
+  background: -moz-radial-gradient(
+    circle,
+    rgba(32, 29, 71, 1) 0%,
+    rgba(23, 21, 58, 1) 100%
+  );
+  background: -webkit-radial-gradient(
+    circle,
+    rgba(32, 29, 71, 1) 0%,
+    rgba(23, 21, 58, 1) 100%
+  );
+  background: radial-gradient(
+    circle,
+    rgba(32, 29, 71, 1) 0%,
+    rgba(23, 21, 58, 1) 100%
+  );
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#201d47",endColorstr="#17153a",GradientType=1);
   position: fixed;
 `;
 

@@ -179,7 +179,7 @@ const Member = ({
                   width="60px"
                   height="20px"
                   radius="6px"
-                  fontSize="12px"
+                  fontSize="10px"
                   onClick={handleRemove}
                 />
               )}
@@ -213,7 +213,7 @@ const OwnerBadge = styled.div`
   padding: 2px 5px;
 
   background: linear-gradient(136.67deg, #ff409a 8.34%, #c438ef 95.26%);
-  box-shadow: 0px 4px 31px #ba1358;
+  box-shadow: 1px 4px 25px #ba1358;
   border-radius: 14px;
   opacity: 1;
 
@@ -222,15 +222,15 @@ const OwnerBadge = styled.div`
     font-style: normal;
     font-weight: 300;
     font-size: 10px;
-    color: #fff;
-    opacity: 1;
+    color: #fff !important;
+    opacity: 0.8;
   }
 `;
 const RemoveButton = styled(Button)`
   width: 60px;
   height: 20px;
   border-radius: 6px;
-  font-size: 10px;
+  font-size: 9px;
 `;
 const MembersAttentivnessWrapper = styled.div`
   display: flex;

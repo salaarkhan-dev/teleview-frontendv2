@@ -153,7 +153,7 @@ const PostWrapper = styled.div`
     #11aadf 81.77%,
     #0b98c5 100%
   );
-  box-shadow: 1px 4px 15px rgba(64, 221, 255, 0.35);
+  box-shadow: 1px 4px 15px rgba(64, 221, 255, 0.5);
   border-radius: 16px 16px 16px 0px;`};
 
   @media (max-width: 480px) {
