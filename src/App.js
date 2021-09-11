@@ -26,9 +26,9 @@ const App = () => {
     <Background>
       <BrowserRouter>
         <Glows>
-          <EllipseOne />
+          {/* <EllipseOne />
           <EllipseTwo />
-          <EllipseThree />
+          <EllipseThree /> */}
           <GlassContainer>
             <Glass>
               {isAuthenticated && <SideBar />}
@@ -192,13 +192,13 @@ const GlassContainer = styled.div`
 const Glass = styled.div`
   display: flex;
   align-items: center;
-  background: linear-gradient(
+  /* background: linear-gradient(
     180deg,
     rgba(51, 47, 103, 0.0549706) 2.1%,
     rgba(69, 65, 133, 0.169724) 57.45%,
     rgba(61, 60, 125, 0.0586787) 98.26%
-  );
-  box-shadow: 0px 48px 69px rgba(23, 18, 43, 0.8453);
+  ); */
+  box-shadow: 0px 48px 69px rgba(0, 0, 0, 0.5453);
   backdrop-filter: blur(15px);
   border-radius: 20px;
   height: 100%;
