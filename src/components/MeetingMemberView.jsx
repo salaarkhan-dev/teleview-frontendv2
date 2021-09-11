@@ -5,14 +5,14 @@ const MeetingMemberView = () => {
   return (
     <MeetingMemberViewContainer>
       <iframe
-        allowfullscreen="allowfullscreen"
+        allowFullScreen="allowfullscreen"
         mozallowfullscreen="mozallowfullscreen"
         msallowfullscreen="msallowfullscreen"
         oallowfullscreen="oallowfullscreen"
         webkitallowfullscreen="webkitallowfullscreen"
         src="https://www.youtube.com/embed/46cXFUzR9XM"
         title="YouTube video player"
-        frameborder="0"
+        frameBorder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       ></iframe>
     </MeetingMemberViewContainer>

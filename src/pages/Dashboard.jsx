@@ -4,14 +4,17 @@ import styled from "styled-components";
 const Dashboard = () => {
   return (
     <DashboardContainer>
-      <h1 className="page-title">Dashboard</h1>
+      <Top>
+        <h1 className="page-title">Dashboard</h1>
+      </Top>
+      <Bottom>Stats</Bottom>
     </DashboardContainer>
   );
 };
 
 export default Dashboard;
 
-const DashboardContainer = styled.div`
+const Top = styled.div`
   .page-title {
     font-family: "Poppins";
     font-style: normal;
@@ -26,4 +29,18 @@ const DashboardContainer = styled.div`
       font-size: 16px;
     }
   }
+`;
+
+const Bottom = styled.div`
+  flex: 1;
+  margin-bottom: 8px;
+  display: flex;
+  flex-direction: column;
+`;
+
+const DashboardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: inherit;
+  color: #ffffff;
 `;

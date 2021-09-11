@@ -172,6 +172,11 @@ const ProfileImage = styled.img`
     width: 250px;
     object-fit: contain;
   }
+  @media (max-width: 320px) {
+    height: 100px;
+    width: 200px;
+    object-fit: contain;
+  }
 `;
 
 const CustomLabel = styled.label`
@@ -260,8 +265,8 @@ const SettingWrapper = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  margin: 2px 50px;
-  padding: 2px 100px;
+  margin: 0 50px;
+  padding: 0 100px;
   @media (max-width: 480px) {
     flex-direction: column;
     justify-content: flex-start;
@@ -273,7 +278,6 @@ const SettingWrapper = styled.form`
 const SettingsContainer = styled.div`
   width: 100%;
   height: 100%;
-  padding: 15px;
 
   @media (max-width: 480px) {
     display: flex;
