@@ -1,7 +1,6 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
-import App from "./App";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { store } from "./app/store";
 import { Provider } from "react-redux";
@@ -12,7 +11,9 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import { SnackbarProvider } from "notistack";
 import { BrowserRouter } from "react-router-dom";
+import Preloader from "./components/Preloader";
 
+const App = lazy(() => import("./App"));
 let persistor = persistStore(store);
 
 ReactDOM.render(
@@ -26,7 +27,9 @@ ReactDOM.render(
             horizontal: "right",
           }}
         >
-          <App />
+          <Suspense fallback={<Preloader />}>
+            <App />
+          </Suspense>
         </SnackbarProvider>
       </BrowserRouter>
     </PersistGate>
