@@ -144,55 +144,55 @@ const Glows = styled.div`
   width: 100vw;
   height: 100vh;
 `;
-const EllipseOne = styled.div`
-  position: absolute;
-  width: 30%;
-  height: 25%;
-  background: linear-gradient(
-    226.43deg,
-    rgba(244, 255, 5, 0.311775) 1.63%,
-    rgba(203, 61, 196, 0.8) 45.46%,
-    rgba(111, 190, 218, 0.8) 79.42%,
-    rgba(56, 255, 231, 0.391259) 100%
-  );
-  mix-blend-mode: normal;
-  opacity: 0.9;
-  filter: blur(100px);
-  transform: rotate(-36.9deg);
-`;
-const EllipseTwo = styled.div`
-  position: absolute;
-  bottom: 5%;
-  left: 45%;
-  width: 50%;
-  height: 40%;
-  background: linear-gradient(
-    226.43deg,
-    rgba(244, 255, 5, 0.311775) 1.63%,
-    rgba(203, 61, 196, 0.8) 45.46%,
-    rgba(111, 190, 218, 0.8) 79.42%,
-    rgba(56, 255, 231, 0.391259) 100%
-  );
-  mix-blend-mode: normal;
-  opacity: 0.7;
-  filter: blur(100px);
-`;
-const EllipseThree = styled.div`
-  position: absolute;
-  right: 5%;
-  width: 50%;
-  height: 50%;
-  background: linear-gradient(
-    226.43deg,
-    rgba(244, 255, 5, 0.292289) 1.63%,
-    rgba(203, 61, 196, 0.75) 45.46%,
-    rgba(111, 190, 218, 0.75) 79.42%,
-    rgba(56, 255, 231, 0.366805) 100%
-  );
-  mix-blend-mode: normal;
-  opacity: 0.7;
-  filter: blur(100px);
-`;
+// const EllipseOne = styled.div`
+//   position: absolute;
+//   width: 30%;
+//   height: 25%;
+//   background: linear-gradient(
+//     226.43deg,
+//     rgba(244, 255, 5, 0.311775) 1.63%,
+//     rgba(203, 61, 196, 0.8) 45.46%,
+//     rgba(111, 190, 218, 0.8) 79.42%,
+//     rgba(56, 255, 231, 0.391259) 100%
+//   );
+//   mix-blend-mode: normal;
+//   opacity: 0.9;
+//   filter: blur(100px);
+//   transform: rotate(-36.9deg);
+// `;
+// const EllipseTwo = styled.div`
+//   position: absolute;
+//   bottom: 5%;
+//   left: 45%;
+//   width: 50%;
+//   height: 40%;
+//   background: linear-gradient(
+//     226.43deg,
+//     rgba(244, 255, 5, 0.311775) 1.63%,
+//     rgba(203, 61, 196, 0.8) 45.46%,
+//     rgba(111, 190, 218, 0.8) 79.42%,
+//     rgba(56, 255, 231, 0.391259) 100%
+//   );
+//   mix-blend-mode: normal;
+//   opacity: 0.7;
+//   filter: blur(100px);
+// `;
+// const EllipseThree = styled.div`
+//   position: absolute;
+//   right: 5%;
+//   width: 50%;
+//   height: 50%;
+//   background: linear-gradient(
+//     226.43deg,
+//     rgba(244, 255, 5, 0.292289) 1.63%,
+//     rgba(203, 61, 196, 0.75) 45.46%,
+//     rgba(111, 190, 218, 0.75) 79.42%,
+//     rgba(56, 255, 231, 0.366805) 100%
+//   );
+//   mix-blend-mode: normal;
+//   opacity: 0.7;
+//   filter: blur(100px);
+// `;
 const GlassContainer = styled.div`
   display: flex;
   justify-content: center;
