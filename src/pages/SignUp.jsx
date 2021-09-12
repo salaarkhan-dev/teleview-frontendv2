@@ -76,6 +76,8 @@ const SignUp = () => {
             name="username"
             value={state.username}
             onChange={handleChange}
+            minLength={4}
+            required
           />
           <TextField
             placeholder="Email"
@@ -83,6 +85,7 @@ const SignUp = () => {
             name="email"
             value={state.email}
             onChange={handleChange}
+            required
           />
           <TextField
             placeholder="Password"
@@ -90,6 +93,7 @@ const SignUp = () => {
             name="password"
             value={state.password}
             onChange={handleChange}
+            required
           />
           <TextField
             placeholder="Confirm Password"
@@ -97,6 +101,7 @@ const SignUp = () => {
             name="username"
             value={confirmPass}
             onChange={handleConfirmPass}
+            required
           />
         </TextFieldWrapper>
         <ButtonWrapper>

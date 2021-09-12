@@ -325,7 +325,7 @@ const MeetingDetailTable = () => {
                   <span>{at.id}</span>
                 </Column>
                 <Column style={{ textTransform: "capitalize" }}>
-                  <span>{`${attendeesDetail?.meeting_title}/${attendeesDetail?.meeting_title}`}</span>
+                  <span>{`${attendeesDetail?.team?.name}/${attendeesDetail?.meeting_title}`}</span>
                 </Column>
                 <Column>
                   <span>
