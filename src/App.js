@@ -21,7 +21,6 @@ import AttendanceDetailMeeting from "./pages/AttendanceDetailMeeting";
 
 const App = () => {
   const isAuthenticated = useSelector(selectorIsAuthenticated);
-
   return (
     <Background>
       <BrowserRouter>
