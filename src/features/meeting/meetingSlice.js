@@ -10,6 +10,7 @@ const initialState = {
   meetingTitle: null,
   isCreated: false,
   isLoading: false,
+  users: [],
   error: null,
 };
 
@@ -88,6 +89,15 @@ const meetingSlice = createSlice({
         meeting_members: payload,
       };
     },
+    userJoin: (state, { payload }) => {
+      state.users = [...state.users, payload];
+    },
+    userLeft: (state, { payload }) => {
+      return {
+        ...state,
+        users: state.users.filter((oldUser) => oldUser.uid !== payload.uid),
+      };
+    },
   },
   extraReducers: {
     [createMeetingAsync.pending]: (state, action) => {
@@ -120,10 +130,12 @@ const meetingSlice = createSlice({
   },
 });
 
-export const { joinMember, leaveMember, updateMember } = meetingSlice.actions;
+export const { userJoin, userLeft, joinMember, leaveMember, updateMember } =
+  meetingSlice.actions;
 export default meetingSlice.reducer;
 
 export const selectorIsLoading = (state) => state.meeting.isLoading;
 export const selectorMeetingMembers = (state) => state.meeting.meeting_members;
 export const selectorMeetingIDs = (state) => state.meeting.meetingIDs;
 export const selectorMeetingTitle = (state) => state.meeting.meetingTitle;
+export const selectorMeetingUsers = (state) => state.meeting.users;

@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"@agnostech/react-agora-ng@^2.0.0-beta16":
+  version "2.0.0-beta16"
+  resolved "https://registry.yarnpkg.com/@agnostech/react-agora-ng/-/react-agora-ng-2.0.0-beta16.tgz#ca215c0d346772a5d873db27e5d6fa08a44d2b45"
+  integrity sha512-q5DKdwBZAYlFLCrNWoaO7OAsedS+38mYJs97vFbk1UTga4dhQDXbrF0oTtvC8K2EOjQMW5/8hShxJY8TjVuTEg==
+
 "@babel/code-frame@7.10.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"
@@ -1739,6 +1744,13 @@
     react-is "^16.8.0 || ^17.0.0"
     react-transition-group "^4.4.0"
 
+"@material-ui/icons@^4.11.2":
+  version "4.11.2"
+  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-4.11.2.tgz#b3a7353266519cd743b6461ae9fdfcb1b25eb4c5"
+  integrity sha512-fQNsKX2TxBmqIGJCSi3tGTO/gZ+eJgWmMJkgDiOfyNaunNaxcklJQFaFogYcFl0qFuaEz1qaXYXboa/bUXVSOQ==
+  dependencies:
+    "@babel/runtime" "^7.4.4"
+
 "@material-ui/lab@^4.0.0-alpha.57":
   version "4.0.0-alpha.57"
   resolved "https://registry.yarnpkg.com/@material-ui/lab/-/lab-4.0.0-alpha.57.tgz#e8961bcf6449e8a8dabe84f2700daacfcafbf83a"
@@ -2821,6 +2833,11 @@ aggregate-error@^3.0.0:
   dependencies:
     clean-stack "^2.0.0"
     indent-string "^4.0.0"
+
+agora-rtc-sdk-ng@^4.7.1:
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/agora-rtc-sdk-ng/-/agora-rtc-sdk-ng-4.7.1.tgz#a34aee03861d23d36a8148b35e75f67a89d9e304"
+  integrity sha512-jf+azF8B/rAMHVQrc853PE0Th6InGmeXnGQ7ROK1+iU+4MSPwNlFWY3VBk5N8jsELGtplrNQGIOkjv1jTiLmjA==
 
 ajv-errors@^1.0.0:
   version "1.0.1"

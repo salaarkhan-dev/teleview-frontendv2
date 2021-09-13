@@ -29,6 +29,7 @@ import { SOCKET_URL } from "../api/endpoints";
 import MeetingOwnerView from "./../components/MeetingOwnerView";
 import CustomProgressBar from "./../components/CustomProgressBar";
 import MeetingMemberView from "../components/MeetingMemberView";
+import { useCallControls } from "@agnostech/react-agora-ng";
 
 const Meeting = (props) => {
   const webcamRef = React.useRef(null);
@@ -51,6 +52,7 @@ const Meeting = (props) => {
   async function fetchMeetingDetail(obj) {
     await dispatch(fetchMeetingDetailAsync(obj));
   }
+  const { leaveCall } = useCallControls();
 
   const runDetector = async () => {
     await axios.get(faceCascadeFile).then((response) => {
@@ -331,6 +333,7 @@ const Meeting = (props) => {
   };
 
   const handleLeave = () => {
+    leaveCall();
     client.current.send(
       JSON.stringify({
         type: "message",
@@ -343,6 +346,7 @@ const Meeting = (props) => {
     history.push(`/teams/${slug}/channels/${channelSlug}`);
   };
   const handleEnd = () => {
+    leaveCall();
     client.current.send(
       JSON.stringify({
         type: "message",
@@ -388,10 +392,10 @@ const Meeting = (props) => {
                 screenshotFormat="image/jpeg"
                 videoConstraints={videoConstraints}
               />
-              <MeetingMemberView />
+              <MeetingMemberView channelSlug={channelSlug} />
             </MeetingMemberViewContainer>
           ) : (
-            <MeetingOwnerView />
+            <MeetingOwnerView channelSlug={channelSlug} />
           )}
         </ChatArea>
         <MemberArea isOwner={isOwner}>
@@ -458,8 +462,9 @@ const CustomWebcam = styled(Webcam)`
   width: 100px;
   border-radius: 5px;
   position: absolute;
-  top: 0;
+  top: 5px;
   right: 0;
+  z-index: 999;
   @media (max-width: 768px) {
     height: 80px;
     width: 80px;

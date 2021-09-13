@@ -31,6 +31,7 @@ const reducers = combineReducers({
 
 const persistConfig = {
   key: "root",
+  blacklist: ["meeting"],
   version: 1,
   storage,
 };

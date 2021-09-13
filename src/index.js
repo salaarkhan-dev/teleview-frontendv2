@@ -12,9 +12,16 @@ import { PersistGate } from "redux-persist/integration/react";
 import { SnackbarProvider } from "notistack";
 import { BrowserRouter } from "react-router-dom";
 import Preloader from "./components/Preloader";
+import { APP_ID } from "./api/agora";
+
+import { AgoraProvider } from "@agnostech/react-agora-ng";
+import AgoraRTC from "agora-rtc-sdk-ng";
+
+// mode can be rtc or live. Refer Agora NG SDK docs for more info
 
 const App = lazy(() => import("./App"));
 let persistor = persistStore(store);
+const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 
 ReactDOM.render(
   <Provider store={store}>
@@ -28,7 +35,9 @@ ReactDOM.render(
           }}
         >
           <Suspense fallback={<Preloader />}>
-            <App />
+            <AgoraProvider client={client} appId={APP_ID}>
+              <App />
+            </AgoraProvider>
           </Suspense>
         </SnackbarProvider>
       </BrowserRouter>
