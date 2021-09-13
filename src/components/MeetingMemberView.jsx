@@ -35,7 +35,6 @@ const MeetingMemberView = ({ channelSlug }) => {
     toggleAudio();
     setMute(!mute);
   };
-
   React.useEffect(() => {
     switch (events.event) {
       case "user-joined":
@@ -69,12 +68,15 @@ const MeetingMemberView = ({ channelSlug }) => {
         )}
       </ButtonWrapper>
       <MeetingMemberViewWrapper>
-        {users.map((user) => (
-          <div key={user.uid.toString()} id={user.uid.toString()}>
-            {user.videoTrack && user.videoTrack.play(user.uid.toString())}
-            {user.audioTrack && user.audioTrack.play()}
-          </div>
-        ))}
+        {users.map((user, ID) =>
+          user.videoTrack ? (
+            <div key={user.uid.toString()} id={user.uid.toString()}>
+              {console.log("TEEEESSSSSSTTT", ID, user)}
+              {user.videoTrack && user.videoTrack.play(user.uid.toString())}
+              {user.audioTrack && user.audioTrack.play()}
+            </div>
+          ) : null
+        )}
       </MeetingMemberViewWrapper>
     </MeetingMemberViewContainer>
   );
@@ -102,10 +104,17 @@ const ButtonWrapper = styled.div`
 `;
 const MeetingMemberViewWrapper = styled.div`
   flex: 1;
+  display: flex;
+  @media (max-width: 768px) {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
   div {
-    width: 100%;
-    height: 100%;
-    z-index: 555;
+    flex: 1;
+    display: flex;
+    padding: 8px;
+    background-color: black;
   }
 `;
 const MeetingMemberViewContainer = styled.div`
@@ -118,5 +127,6 @@ const MeetingMemberViewContainer = styled.div`
 
   .agora_video_player {
     object-fit: cover;
+    flex: 1;
   }
 `;
