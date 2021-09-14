@@ -71,7 +71,6 @@ const MeetingMemberView = ({ channelSlug }) => {
         {users.map((user, ID) =>
           user.videoTrack ? (
             <div key={user.uid.toString()} id={user.uid.toString()}>
-              {console.log("TEEEESSSSSSTTT", ID, user)}
               {user.videoTrack && user.videoTrack.play(user.uid.toString())}
               {user.audioTrack && user.audioTrack.play()}
             </div>
@@ -110,11 +109,16 @@ const MeetingMemberViewWrapper = styled.div`
     display: flex;
     flex-direction: column;
   }
+
   div {
     flex: 1;
     display: flex;
     padding: 8px;
-    background-color: black;
+
+    .agora_video_player {
+      object-fit: cover !important;
+      flex: 1;
+    }
   }
 `;
 const MeetingMemberViewContainer = styled.div`
@@ -124,9 +128,4 @@ const MeetingMemberViewContainer = styled.div`
   height: inherit;
   flex: 1;
   color: white;
-
-  .agora_video_player {
-    object-fit: cover;
-    flex: 1;
-  }
 `;

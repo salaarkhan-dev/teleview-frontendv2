@@ -466,6 +466,7 @@ const CustomWebcam = styled(Webcam)`
   right: 0;
   z-index: 999;
   visibility: hidden;
+  /* opacity: 0.4; */
   @media (max-width: 768px) {
     height: 80px;
     width: 80px;
