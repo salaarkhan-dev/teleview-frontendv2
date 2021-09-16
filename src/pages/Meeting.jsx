@@ -458,15 +458,13 @@ const MeetingContainer = styled.div`
 `;
 
 const CustomWebcam = styled(Webcam)`
-  height: 100px;
-  width: 100px;
+  height: 80px;
+  width: 80px;
   border-radius: 5px;
   position: absolute;
   top: 5px;
   right: 0;
   z-index: 999;
-  visibility: hidden;
-  /* opacity: 0.4; */
   @media (max-width: 768px) {
     height: 80px;
     width: 80px;
