@@ -60,7 +60,7 @@ const MeetingMemberView = ({ channelSlug }) => {
 
   return (
     <MeetingMemberViewContainer>
-      <ButtonWrapper>
+      <ButtonWrapper onClick={handleAudio}>
         {mute ? (
           <CustomMicOffIcon onClick={handleAudio} />
         ) : (
@@ -98,12 +98,14 @@ const ButtonWrapper = styled.div`
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.2);
-  z-index: 999;
+  /* z-index: 999; */
   padding: 10px;
 `;
+
 const MeetingMemberViewWrapper = styled.div`
   flex: 1;
   display: flex;
+  position: relative;
   @media (max-width: 768px) {
     flex: 1;
     display: flex;
@@ -113,10 +115,17 @@ const MeetingMemberViewWrapper = styled.div`
   div {
     flex: 1;
     display: flex;
-    padding: 8px;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
 
     .agora_video_player {
-      object-fit: cover !important;
+      object-fit: scale-down !important;
       flex: 1;
     }
   }

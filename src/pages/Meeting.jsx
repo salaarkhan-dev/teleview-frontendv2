@@ -67,7 +67,7 @@ const Meeting = (props) => {
         );
       } catch (e) {
         console.log("fs error:" + e);
-        window.location.reload();
+        window.location.reload(true);
       }
     });
     await axios.get(eyeCascadeFile).then((response) => {
@@ -82,7 +82,7 @@ const Meeting = (props) => {
         );
       } catch (e) {
         console.log("fs error:" + e);
-        window.location.reload();
+        window.location.reload(true);
       }
     });
     const expModel = await tf.loadLayersModel(
