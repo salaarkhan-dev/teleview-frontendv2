@@ -98,7 +98,7 @@ const ButtonWrapper = styled.div`
   left: 0;
   right: 0;
   background-color: rgba(0, 0, 0, 0.2);
-  /* z-index: 999; */
+  z-index: 999;
   padding: 10px;
 `;
 
