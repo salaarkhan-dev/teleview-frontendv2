@@ -332,8 +332,8 @@ const Meeting = (props) => {
     facingMode: "user",
   };
 
-  const handleLeave = () => {
-    leaveCall();
+  const handleLeave = async () => {
+    await leaveCall();
     client.current.send(
       JSON.stringify({
         type: "message",
@@ -345,8 +345,8 @@ const Meeting = (props) => {
     );
     history.push(`/teams/${slug}/channels/${channelSlug}`);
   };
-  const handleEnd = () => {
-    leaveCall();
+  const handleEnd = async () => {
+    await leaveCall();
     client.current.send(
       JSON.stringify({
         type: "message",
