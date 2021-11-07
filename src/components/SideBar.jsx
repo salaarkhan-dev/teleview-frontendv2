@@ -4,7 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 import { ReactComponent as Team } from "../assets/icons/Vector-1.svg";
 import { ReactComponent as Search } from "../assets/icons/Vector-2.svg";
 import { ReactComponent as Attendance } from "../assets/icons/Vector-3.svg";
-import { ReactComponent as Home } from "../assets/icons/Vector-4.svg";
+// import { ReactComponent as Home } from "../assets/icons/Vector-4.svg";
 import { ReactComponent as Setting } from "../assets/icons/Vector.svg";
 import { ReactComponent as Logout } from "../assets/icons/logout1.svg";
 import { useDispatch, useSelector } from "react-redux";
@@ -38,12 +38,12 @@ const SideBar = () => {
   return (
     <SideBarContainer sidebarToggle={sidebarToggle}>
       <Icons>
-        <Link to="/dashboard">
+        {/* <Link to="/dashboard">
           <HomeIcon
             active={`${selectedIndex === 0}`}
             onClick={() => handleMenuItemClick(0)}
           />
-        </Link>
+        </Link> */}
         <Link to="/teams">
           <TeamIcon
             active={`${selectedIndex === 1}`}
@@ -99,17 +99,17 @@ const SideBarContainer = styled.div`
     visibility: ${(props) => (props.sidebarToggle ? "visible" : "hidden")};
   }
 `;
-const HomeIcon = styled(Home)`
-  opacity: ${(props) => (props.active === "true" ? 1 : 0.6)};
-  filter: ${(props) =>
-    props.active === "true"
-      ? "drop-shadow(0px 5px 8px rgba(64, 221, 255, 0.6));"
-      : ""};
-  :hover {
-    opacity: 1;
-    transition: opacity 0.5s ease;
-  }
-`;
+// const HomeIcon = styled(Home)`
+//   opacity: ${(props) => (props.active === "true" ? 1 : 0.6)};
+//   filter: ${(props) =>
+//     props.active === "true"
+//       ? "drop-shadow(0px 5px 8px rgba(64, 221, 255, 0.6));"
+//       : ""};
+//   :hover {
+//     opacity: 1;
+//     transition: opacity 0.5s ease;
+//   }
+// `;
 const TeamIcon = styled(Team)`
   opacity: ${(props) => (props.active === "true" ? 1 : 0.6)};
   filter: ${(props) =>

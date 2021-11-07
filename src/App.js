@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import SideBar from "./components/SideBar";
-import Dashboard from "./pages/Dashboard";
+// import Dashboard from "./pages/Dashboard";
 import Header from "./components/Header";
 import { Container } from "reactstrap";
 import Teams from "./pages/Teams";
@@ -50,11 +50,11 @@ const App = () => {
                   ) : (
                     <Switch>
                       <Route path="/" exact>
-                        <Redirect to="/dashboard" exact />
+                        <Redirect to="/teams" exact />
                       </Route>
-                      <Route path="/dashboard" exact>
+                      {/* <Route path="/dashboard" exact>
                         <Dashboard />
-                      </Route>
+                      </Route> */}
                       <Route path="/teams" exact>
                         <Teams />
                       </Route>

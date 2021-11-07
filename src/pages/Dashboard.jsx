@@ -7,7 +7,7 @@ const Dashboard = () => {
       <Top>
         <h1 className="page-title">Dashboard</h1>
       </Top>
-      <Bottom>Stats</Bottom>
+      <Bottom>jj</Bottom>
     </DashboardContainer>
   );
 };
@@ -36,6 +36,7 @@ const Bottom = styled.div`
   margin-bottom: 8px;
   display: flex;
   flex-direction: column;
+  background-color: red;
 `;
 
 const DashboardContainer = styled.div`
