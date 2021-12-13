@@ -149,7 +149,7 @@ const Meeting = (props) => {
               grayFace.cols,
               1,
             ]);
-            // Normalize the image from [0, 255] to [0, 1].
+            // Normalize the image from [0, 255] to [0, 1]. 
             const offset = tf.scalar(255);
             const normalized = croppedFace.div(offset);
 

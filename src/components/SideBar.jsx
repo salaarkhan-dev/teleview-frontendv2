@@ -13,22 +13,32 @@ import { selectorSidebarToggle } from "../features/sidebar/sidebarSlice";
 
 const SideBar = () => {
   const [selectedIndex, setSelectedIndex] = React.useState(0);
+  const [selectedPage, setSelectedPage] = React.useState("");
   const history = useHistory();
   const dispatch = useDispatch();
   const sidebarToggle = useSelector(selectorSidebarToggle);
 
-  const handleMenuItemClick = (index) => {
+  const handleMenuItemClick = (index, page) => {
     setSelectedIndex(index);
+    setSelectedPage(page);
   };
   React.useEffect(() => {
     const data = localStorage.getItem("selected-index");
-    if (data) {
+    const page = localStorage.getItem("selected-page");
+    if (page) {
       setSelectedIndex(JSON.parse(data));
+      setSelectedPage(JSON.parse(page));
     }
   }, []);
 
+  // React.useEffect(() => {
+  //   console.log("Path", history.location.pathname.split("/"))
+  // });
+  
+
   React.useEffect(() => {
     localStorage.setItem("selected-index", JSON.stringify(selectedIndex));
+    localStorage.setItem("selected-page", JSON.stringify(selectedPage));
   });
   const handleLogout = () => {
     console.log("logout");
@@ -46,26 +56,26 @@ const SideBar = () => {
         </Link> */}
         <Link to="/teams">
           <TeamIcon
-            active={`${selectedIndex === 1}`}
-            onClick={() => handleMenuItemClick(1)}
+            active={`${selectedPage === "teams"}`}
+            onClick={() => handleMenuItemClick(1,"teams")}
           />
         </Link>
         <Link to="/jointeams">
           <SearchIcon
-            active={`${selectedIndex === 2}`}
-            onClick={() => handleMenuItemClick(2)}
+            active={`${selectedPage === "jointeams"}`}
+            onClick={() => handleMenuItemClick(2, "jointeams")}
           />
         </Link>
         <Link to="/attendance">
           <AttendanceIcon
-            active={`${selectedIndex === 3}`}
-            onClick={() => handleMenuItemClick(3)}
+            active={`${selectedPage === "attendance"}`}
+            onClick={() => handleMenuItemClick(3, "attendance")}
           />
         </Link>
         <Link to="/settings">
           <SettingIcon
-            active={`${selectedIndex === 4}`}
-            onClick={() => handleMenuItemClick(4)}
+            active={`${selectedPage === "settings"}`}
+            onClick={() => handleMenuItemClick(4, "settings")}
           />
         </Link>
         <Link to="/logout">
