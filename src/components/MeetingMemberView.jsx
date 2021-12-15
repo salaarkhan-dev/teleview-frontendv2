@@ -70,7 +70,9 @@ const MeetingMemberView = ({ channelSlug }) => {
       <MeetingMemberViewWrapper>
         {
           users.map((user, ID) =>
-            user.videoTrack && user.videoTrack._videoHeight === window.screen.height ? (
+            user.videoTrack &&
+              user.videoTrack._videoHeight === window.screen.height &&
+              user.videoTrack._videoWidth === window.screen.width ? (
               <div key={user.uid.toString()} id={user.uid.toString()}>
                 {user.videoTrack && user.videoTrack.play(user.uid.toString())}
                 {user.audioTrack && user.audioTrack.play()}
