@@ -1,23 +1,23 @@
-import React from "react";
+import React, { lazy } from "react";
 import styled from "styled-components";
-import SideBar from "./components/SideBar";
-// import Dashboard from "./pages/Dashboard";
-import Header from "./components/Header";
 import { Container } from "reactstrap";
-import Teams from "./pages/Teams";
-import JoinTeams from "./pages/JoinTeams";
-import Attendance from "./pages/Attendance";
-import Settings from "./pages/Settings";
-
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
-import TeamDetail from "./pages/TeamDetail";
-import SignIn from "./pages/SignIn";
-import SignUp from "./pages/SignUp";
 import { useSelector } from "react-redux";
 import { selectorIsAuthenticated } from "./features/authentication/authSlice";
-import Meeting from "./pages/Meeting";
-import AttendanceDetail from "./pages/AttendanceDetail";
-import AttendanceDetailMeeting from "./pages/AttendanceDetailMeeting";
+
+const Header = lazy(() => import("./components/Header"));
+const SideBar = lazy(() => import("./components/SideBar"));
+
+const AttendanceDetail = lazy(() => import("./pages/AttendanceDetail"));
+const AttendanceDetailMeeting = lazy(() => import("./pages/AttendanceDetailMeeting"));
+const TeamDetail = lazy(() => import("./pages/TeamDetail"));
+const SignIn = lazy(() => import("./pages/SignIn"));
+const SignUp = lazy(() => import("./pages/SignUp"));
+const Teams = lazy(() => import("./pages/Teams"));
+const JoinTeams = lazy(() => import("./pages/JoinTeams"));
+const Attendance = lazy(() => import("./pages/Attendance"));
+const Settings = lazy(() => import("./pages/Settings"));
+const Meeting = lazy(() => import("./pages/Meeting"));
 
 const App = () => {
   const isAuthenticated = useSelector(selectorIsAuthenticated);
