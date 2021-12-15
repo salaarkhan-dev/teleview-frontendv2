@@ -4,10 +4,10 @@ import { Container } from "reactstrap";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { selectorIsAuthenticated } from "./features/authentication/authSlice";
-
+import Preloader from "./components/Preloader";
 const Header = lazy(() => import("./components/Header"));
 const SideBar = lazy(() => import("./components/SideBar"));
-const Preloader = lazy(() => import("./components/Preloader"));
+// const Preloader = lazy(() => import("./components/Preloader"));
 
 
 const AttendanceDetail = lazy(() => import("./pages/AttendanceDetail"));
