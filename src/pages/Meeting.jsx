@@ -34,7 +34,6 @@ import { useCallControls } from "@agnostech/react-agora-ng";
 const Meeting = (props) => {
   const webcamRef = React.useRef(null);
   const client = React.useRef(null);
-  const outRef = React.useRef(null);
   const dispatch = useDispatch();
   const history = useHistory();
   const slug = props.match.params.slug;
@@ -123,7 +122,7 @@ const Meeting = (props) => {
       let eyesize = new cv.Size(224, 224);
       let faceCascade = new cv.CascadeClassifier();
       let eyesCascade = new cv.CascadeClassifier();
-      const FPS = 30;
+      const FPS = 10;
       let frame = 0;
       let score = 0;
 
@@ -159,31 +158,24 @@ const Meeting = (props) => {
             const predictedEmotion = pred.argMax(1).dataSync()[0];
             switch (predictedEmotion) {
               case 0:
-                console.log("angry");
                 expression = "angry";
                 break;
               case 1:
-                console.log("disgust");
                 expression = "disgust";
                 break;
               case 2:
-                console.log("fear");
                 expression = "fear";
                 break;
               case 3:
-                console.log("happy");
                 expression = "happy";
                 break;
               case 4:
-                console.log("sad");
                 expression = "sad";
                 break;
               case 5:
-                console.log("surprise");
                 expression = "surprise";
                 break;
               case 6:
-                console.log("neutral");
                 expression = "neutral";
                 break;
               default:
@@ -212,8 +204,8 @@ const Meeting = (props) => {
               const pred = await drowModel.predict(batched).dataSync()[0];
               frame += 1;
               score += pred;
-              if (frame === 15) {
-                const performance = ((score / 15) * 100).toFixed(2);
+              if (frame === 10) {
+                const performance = ((score / 10) * 100).toFixed(2);
                 frame = 0;
                 score = 0;
                 client.current.send(
@@ -227,13 +219,13 @@ const Meeting = (props) => {
                     expression: expression,
                   })
                 );
+                console.log(expression)
                 if (performance > 45) {
                   console.log("attentive", performance + "%");
                 } else {
                   console.log("drowsy", performance + "%");
                 }
               }
-              cv.imshow(outRef.current, roiColorEye);
               roiColorEye.delete();
             }
             roiGray.delete();

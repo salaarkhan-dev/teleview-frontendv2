@@ -68,14 +68,16 @@ const MeetingMemberView = ({ channelSlug }) => {
         )}
       </ButtonWrapper>
       <MeetingMemberViewWrapper>
-        {users.map((user, ID) =>
-          user.videoTrack && !(user.videoTrack._videoHeight < 480) ? (
-            <div key={user.uid.toString()} id={user.uid.toString()}>
-              {user.videoTrack && user.videoTrack.play(user.uid.toString())}
-              {user.audioTrack && user.audioTrack.play()}
-            </div>
-          ) : null
-        )}
+        {
+          users.map((user, ID) =>
+            user.videoTrack && user.videoTrack._videoHeight === window.screen.height ? (
+              <div key={user.uid.toString()} id={user.uid.toString()}>
+                {user.videoTrack && user.videoTrack.play(user.uid.toString())}
+                {user.audioTrack && user.audioTrack.play()}
+              </div>
+            ) : null
+          )
+        }
       </MeetingMemberViewWrapper>
     </MeetingMemberViewContainer>
   );
