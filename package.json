@@ -28,10 +28,12 @@
     "react-webcam": "^6.0.0",
     "reactstrap": "^8.9.0",
     "redux-persist": "^6.0.0",
+    "source-map-explorer": "^2.5.2",
     "styled-components": "^5.2.3",
     "websocket": "^1.0.34"
   },
   "scripts": {
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "start": "set HTTPS=true&&react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
