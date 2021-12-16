@@ -1,5 +1,5 @@
 import { Skeleton } from "@material-ui/lab";
-import React, { lazy } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import styled from "styled-components";
 import { w3cwebsocket as W3CWebSocket } from "websocket";

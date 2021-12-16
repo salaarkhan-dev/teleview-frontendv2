@@ -329,6 +329,7 @@ const TeamsDetail = (props) => {
                     value={state.content}
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
+                    required
                   />
                 </TextFieldWrapper>
                 {(sending && <CustomSpinner />) || (
