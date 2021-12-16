@@ -31,10 +31,9 @@ import CustomProgressBar from "./../components/CustomProgressBar";
 import MeetingMemberView from "../components/MeetingMemberView";
 import { useCallControls } from "@agnostech/react-agora-ng";
 
-const cv = lazy(() => import("@techstark/opencv-js"));
-const { INTER_AREA } = lazy(() => import("@techstark/opencv-js"));
-const faceCascadeFile = lazy(() => import("../assets/cascade/haarcascade_frontalface_default.xml"));
-const eyeCascadeFile = lazy(() => import("../assets/cascade/haarcascade_eye.xml"));
+import cv, { INTER_AREA} from "@techstark/opencv-js";
+import faceCascadeFile from "../assets/cascade/haarcascade_frontalface_default.xml";
+import eyeCascadeFile from "../assets/cascade/haarcascade_eye.xml";
 
 const Meeting = (props) => {
   const webcamRef = React.useRef(null);
