@@ -1,32 +1,32 @@
 import {
   useCallControls,
-  useCallEvents,
-  useJoinCall,
+  // useCallEvents,
+  // useJoinCall,
 } from "@agnostech/react-agora-ng";
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import styled from "styled-components";
 import {
   selectorMeetingUsers,
-  userJoin,
-  userLeft,
+  // userJoin,
+  // userLeft,
 } from "../features/meeting/meetingSlice";
 import MicIcon from "@material-ui/icons/Mic";
 import MicOffIcon from "@material-ui/icons/MicOff";
 
-const MeetingMemberView = ({ channelSlug }) => {
+const MeetingMemberView = () => {
   const users = useSelector(selectorMeetingUsers);
-  const { events } = useCallEvents();
+  // const { events } = useCallEvents();
   const [mute, setMute] = React.useState(false);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // join the call
-  useJoinCall({
-    channel: channelSlug,
-    userId: null,
-    token: null,
-    localVideoDiv: "Test",
-  });
+  // useJoinCall({
+  //   channel: channelSlug,
+  //   userId: null,
+  //   token: null,
+  //   localVideoDiv: "Test",
+  // });
 
   //get the call controlls
   const { toggleAudio } = useCallControls();
