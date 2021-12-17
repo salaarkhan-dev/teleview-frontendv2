@@ -126,7 +126,7 @@ const Meeting = (props) => {
       let eyesize = new cv.Size(224, 224);
       let faceCascade = new cv.CascadeClassifier();
       let eyesCascade = new cv.CascadeClassifier();
-      const FPS = 10;
+      const FPS = 15;
       let frame = 0;
       let score = 0;
 

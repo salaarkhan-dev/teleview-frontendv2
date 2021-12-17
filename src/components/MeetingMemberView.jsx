@@ -35,28 +35,28 @@ const MeetingMemberView = ({ channelSlug }) => {
     toggleAudio();
     setMute(!mute);
   };
-  React.useEffect(() => {
-    switch (events.event) {
-      case "user-joined":
-        console.log("user joined");
-        const user = events.data.remoteUser;
-        dispatch(userJoin(user));
-        break;
-      case "user-published":
-        console.log("user published");
-        break;
-      case "user-unpublished":
-        console.log("user unpublished");
-        break;
-      case "user-left":
-        console.log("user left");
-        const user2 = events.data.remoteUser;
-        dispatch(userLeft(user2));
-        break;
-      default:
-        break;
-    }
-  }, [events, dispatch]);
+  // React.useEffect(() => {
+  //   switch (events.event) {
+  //     case "user-joined":
+  //       console.log("user joined");
+  //       const user = events.data.remoteUser;
+  //       dispatch(userJoin(user));
+  //       break;
+  //     case "user-published":
+  //       console.log("user published");
+  //       break;
+  //     case "user-unpublished":
+  //       console.log("user unpublished");
+  //       break;
+  //     case "user-left":
+  //       console.log("user left");
+  //       const user2 = events.data.remoteUser;
+  //       dispatch(userLeft(user2));
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // }, [events, dispatch]);
 
   return (
     <MeetingMemberViewContainer>
@@ -70,9 +70,10 @@ const MeetingMemberView = ({ channelSlug }) => {
       <MeetingMemberViewWrapper>
         {
           users.map((user, ID) =>
-            user.videoTrack &&
-              user.videoTrack._videoHeight === window.screen.height &&
-              user.videoTrack._videoWidth === window.screen.width ? (
+            user.videoTrack && true
+              // user.videoTrack._videoHeight === window.screen.height &&
+              // user.videoTrack._videoWidth === window.screen.width
+              ? (
               <div key={user.uid.toString()} id={user.uid.toString()}>
                 {user.videoTrack && user.videoTrack.play(user.uid.toString())}
                 {user.audioTrack && user.audioTrack.play()}
