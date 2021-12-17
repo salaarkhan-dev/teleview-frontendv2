@@ -1,24 +1,24 @@
 import {
   useCallControls,
-  // useCallEvents,
+  useCallEvents,
   useJoinCall,
 } from "@agnostech/react-agora-ng";
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import styled from "styled-components";
 import {
   selectorMeetingUsers,
-  // userJoin,
-  // userLeft,
+  userJoin,
+  userLeft,
 } from "../features/meeting/meetingSlice";
 import MicIcon from "@material-ui/icons/Mic";
 import MicOffIcon from "@material-ui/icons/MicOff";
 
 const MeetingMemberView = ({ channelSlug }) => {
   const users = useSelector(selectorMeetingUsers);
-  // const { events } = useCallEvents();
+  const { events } = useCallEvents();
   const [mute, setMute] = React.useState(false);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   // join the call
   useJoinCall({
@@ -35,28 +35,28 @@ const MeetingMemberView = ({ channelSlug }) => {
     toggleAudio();
     setMute(!mute);
   };
-  // React.useEffect(() => {
-  //   switch (events.event) {
-  //     case "user-joined":
-  //       console.log("user joined");
-  //       const user = events.data.remoteUser;
-  //       dispatch(userJoin(user));
-  //       break;
-  //     case "user-published":
-  //       console.log("user published");
-  //       break;
-  //     case "user-unpublished":
-  //       console.log("user unpublished");
-  //       break;
-  //     case "user-left":
-  //       console.log("user left");
-  //       const user2 = events.data.remoteUser;
-  //       dispatch(userLeft(user2));
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // }, [events, dispatch]);
+  React.useEffect(() => {
+    switch (events.event) {
+      case "user-joined":
+        console.log("user joined");
+        const user = events.data.remoteUser;
+        dispatch(userJoin(user));
+        break;
+      case "user-published":
+        console.log("user published");
+        break;
+      case "user-unpublished":
+        console.log("user unpublished");
+        break;
+      case "user-left":
+        console.log("user left");
+        const user2 = events.data.remoteUser;
+        dispatch(userLeft(user2));
+        break;
+      default:
+        break;
+    }
+  }, [events, dispatch]);
 
   return (
     <MeetingMemberViewContainer>
