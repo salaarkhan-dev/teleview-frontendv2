@@ -1,7 +1,7 @@
 import {
   useCallControls,
   // useCallEvents,
-  // useJoinCall,
+  useJoinCall,
 } from "@agnostech/react-agora-ng";
 import React from "react";
 import { useSelector } from "react-redux";
@@ -21,12 +21,12 @@ const MeetingMemberView = () => {
   // const dispatch = useDispatch();
 
   // join the call
-  // useJoinCall({
-  //   channel: channelSlug,
-  //   userId: null,
-  //   token: null,
-  //   localVideoDiv: "Test",
-  // });
+  useJoinCall({
+    channel: channelSlug,
+    userId: null,
+    token: null,
+    localVideoDiv: "Test",
+  });
 
   //get the call controlls
   const { toggleAudio } = useCallControls();
