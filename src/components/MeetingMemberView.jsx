@@ -14,7 +14,7 @@ import {
 import MicIcon from "@material-ui/icons/Mic";
 import MicOffIcon from "@material-ui/icons/MicOff";
 
-const MeetingMemberView = () => {
+const MeetingMemberView = ({ channelSlug }) => {
   const users = useSelector(selectorMeetingUsers);
   // const { events } = useCallEvents();
   const [mute, setMute] = React.useState(false);
