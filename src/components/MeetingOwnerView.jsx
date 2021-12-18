@@ -38,6 +38,7 @@ const MeetingOwnerView = ({ channelSlug }) => {
       case "user-joined":
         console.log("user joined");
         const user = events.data.remoteUser;
+        user["owner"] = true;
         dispatch(userJoin(user));
         break;
       case "user-published":

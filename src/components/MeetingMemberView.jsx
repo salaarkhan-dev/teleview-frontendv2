@@ -25,7 +25,7 @@ const MeetingMemberView = ({ channelSlug }) => {
     channel: channelSlug,
     userId: null,
     token: null,
-    localVideoDiv: "Test",
+    // localVideoDiv: "Test",
   });
 
   //get the call controlls
@@ -70,7 +70,9 @@ const MeetingMemberView = ({ channelSlug }) => {
       <MeetingMemberViewWrapper>
         {
           users.map((user, ID) =>
-            user.videoTrack && true
+          // console.log("user",user)
+          
+            user.videoTrack 
               // user.videoTrack._videoHeight === window.screen.height &&
               // user.videoTrack._videoWidth === window.screen.width
               ? (

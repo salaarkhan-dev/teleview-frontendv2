@@ -2,6 +2,7 @@
   margin: 0;
   padding: 0;
 }
+
 body {
   margin: 0;
   font-family: "Poppins", sans-serif;
@@ -9,9 +10,4 @@ body {
   -moz-osx-font-smoothing: grayscale;
   overflow: hidden;
   scroll-behavior: smooth;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
 }
